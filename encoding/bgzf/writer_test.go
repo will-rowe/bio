@@ -11,7 +11,6 @@ import (
 	"github.com/klauspost/compress/gzip"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/yasushi-saito/zlibng"
 )
 
 func TestWriter(t *testing.T) {
@@ -28,7 +27,7 @@ func TestWriter(t *testing.T) {
 			var buf bytes.Buffer
 			var w *Writer
 			if useParams {
-				w, err = NewWriterParams(&buf, 1, 0x0ff05, zlibng.RLEStrategy, 3)
+				w, err = NewWriterParams(&buf, 1, 0x0ff05, 0, 3)
 			} else {
 				w, err = NewWriter(&buf, 1)
 			}
@@ -60,7 +59,7 @@ func TestWriter(t *testing.T) {
 func TestVOffset(t *testing.T) {
 	// Set bgzf block size to 5.
 	var buf bytes.Buffer
-	w, err := NewWriterParams(&buf, 1, 5, zlibng.RLEStrategy, 0)
+	w, err := NewWriterParams(&buf, 1, 5, 0, 0)
 	require.Nil(t, err)
 
 	// Write 4 bytes, should not cause block completion, so voffset should be (0, 4)

@@ -1,34 +1,23 @@
+//go:build cgo
 // +build cgo
 
 package bgzf
 
 import (
+	"compress/zlib"
 	"fmt"
 	"io"
-
-	"github.com/yasushi-saito/zlibng"
 )
 
 // gzipCreate creates gzip WriteClosers.
 type gzipFactory struct {
-	level     int
-	strategy  int
-	gzWriter *zlibng.Writer
+	level    int
+	strategy int
+	gzWriter *zlib.Writer
 }
 
 func (c *gzipFactory) create(w io.Writer) (io.WriteCloser, error) {
-	var err error
-	c.gzWriter, err = zlibng.NewWriter(w, zlibng.Opts{Level: c.level, Strategy: c.strategy})
-	if err != nil {
-		return nil, err
-	}
-	header := zlibng.GzipHeader{Extra: make([]byte, len(bgzfExtra))}
-	copy(header.Extra[:], bgzfExtra[:])
-	header.OS = 0xff // Unknown OS value
-	if err = c.gzWriter.SetHeader(header); err != nil {
-		c.gzWriter.Close() // nolint: errcheck
-		return nil, err
-	}
+	c.gzWriter = zlib.NewWriter(w)
 	return c.gzWriter, nil
 }
 

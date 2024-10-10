@@ -14,12 +14,11 @@ require (
 	github.com/klauspost/compress v1.8.6
 	github.com/minio/highwayhash v0.0.0-20190112144901-fc990dfafa15
 	github.com/pkg/errors v0.9.1
+	github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72
 	github.com/stretchr/testify v1.4.0
-	github.com/yasushi-saito/zlibng v0.0.0-20190922135643-2a860060b80c
+	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
 	golang.org/x/sys v0.0.0-20200331124033-c3d80250170d
 	v.io/x/lib v0.1.5
 )
-
-replace github.com/yasushi-saito/zlibng => compress/zlib
 
 go 1.13
