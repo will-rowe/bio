@@ -1,4 +1,4 @@
-module github.com/grailbio/bio
+module github.com/will-rowe/bio
 
 require (
 	blainsmith.com/go/seahash v1.1.2
