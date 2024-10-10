@@ -20,4 +20,6 @@ require (
 	v.io/x/lib v0.1.5
 )
 
+replace github.com/yasushi-saito/zlibng => compress/zlib
+
 go 1.13
